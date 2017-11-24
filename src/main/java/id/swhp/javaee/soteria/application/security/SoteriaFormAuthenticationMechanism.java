@@ -22,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 @AutoApplySession // For "Is user already logged-in?"
 @RememberMe(
         cookieMaxAgeSeconds = 60 * 60 * 24 * 14, // 14 days
-        cookieSecureOnly = false // Remove this when login is served over HTTPS.
+        cookieSecureOnly = false, // Remove this when login is served over HTTPS.
+        isRememberMeExpression = "#{self.isRememberMe(httpMessageContext)}"
 )
 @LoginToContinue(
         loginPage = "/login.xhtml?continue=true", // specify your login url
@@ -45,6 +46,11 @@ public class SoteriaFormAuthenticationMechanism implements HttpAuthenticationMec
         } else {
             return context.doNothing();
         }
+    }
+
+    // this was called on @RememberMe annotations
+    public Boolean isRememberMe(HttpMessageContext httpMessageContext) {
+        return httpMessageContext.getAuthParameters().isRememberMe();
     }
 
     // Workaround for Weld bug; at least in Weld 2.3.2 default methods are not intercepted
