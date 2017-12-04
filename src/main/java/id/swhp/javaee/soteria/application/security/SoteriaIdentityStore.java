@@ -1,17 +1,19 @@
 package id.swhp.javaee.soteria.application.security;
 
+import static javax.security.enterprise.identitystore.CredentialValidationResult.INVALID_RESULT;
+import static javax.security.enterprise.identitystore.CredentialValidationResult.NOT_VALIDATED_RESULT;
+
 import id.swhp.javaee.soteria.business.account.boundary.AccountStore;
 import id.swhp.javaee.soteria.business.account.entity.Account;
 import id.swhp.javaee.soteria.business.exception.boundary.AccountNotVerifiedException;
 import id.swhp.javaee.soteria.business.exception.boundary.InvalidCredentialException;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.security.enterprise.credential.CallerOnlyCredential;
 import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
-import static javax.security.enterprise.identitystore.CredentialValidationResult.INVALID_RESULT;
-import static javax.security.enterprise.identitystore.CredentialValidationResult.NOT_VALIDATED_RESULT;
 import javax.security.enterprise.identitystore.IdentityStore;
 
 /**
@@ -20,6 +22,7 @@ import javax.security.enterprise.identitystore.IdentityStore;
  * @since 1.0
  */
 @ApplicationScoped
+@Default
 public class SoteriaIdentityStore implements IdentityStore {
 
     // call our EJB service to validate the account

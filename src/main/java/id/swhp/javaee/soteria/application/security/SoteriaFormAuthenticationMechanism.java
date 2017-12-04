@@ -2,7 +2,6 @@ package id.swhp.javaee.soteria.application.security;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.security.auth.message.AuthException;
 import javax.security.enterprise.AuthenticationStatus;
 import javax.security.enterprise.authentication.mechanism.http.AutoApplySession;
 import javax.security.enterprise.authentication.mechanism.http.HttpAuthenticationMechanism;
@@ -10,7 +9,7 @@ import javax.security.enterprise.authentication.mechanism.http.HttpMessageContex
 import javax.security.enterprise.authentication.mechanism.http.LoginToContinue;
 import javax.security.enterprise.authentication.mechanism.http.RememberMe;
 import javax.security.enterprise.credential.Credential;
-import javax.security.enterprise.identitystore.IdentityStore;
+import javax.security.enterprise.identitystore.IdentityStoreHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SoteriaFormAuthenticationMechanism implements HttpAuthenticationMechanism {
 
     @Inject
-    IdentityStore identityStore;
+    IdentityStoreHandler identityStoreHandler;
 
     @Override
     public AuthenticationStatus validateRequest(HttpServletRequest req, HttpServletResponse res, HttpMessageContext context) {
@@ -42,7 +41,7 @@ public class SoteriaFormAuthenticationMechanism implements HttpAuthenticationMec
         Credential credential = context.getAuthParameters().getCredential();
 
         if (credential != null) {
-            return context.notifyContainerAboutLogin(this.identityStore.validate(credential));
+            return context.notifyContainerAboutLogin(this.identityStoreHandler.validate(credential));
         } else {
             return context.doNothing();
         }
