@@ -3,6 +3,7 @@ package id.swhp.javaee.soteria.business.security.control;
 import id.swhp.javaee.soteria.business.security.boundary.HashGenerator;
 import id.swhp.javaee.soteria.business.security.entity.HashServiceType;
 import id.swhp.javaee.soteria.business.security.entity.HashType;
+import id.swhp.javaee.soteria.business.security.entity.Sha;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,11 +17,12 @@ import javax.ejb.Stateless;
  */
 @Stateless
 @HashServiceType(HashType.SHA)
+@Sha
 public class SHAGenerator implements HashGenerator {
 
     public String algorithmName;
 
-    public SHAGenerator() {
+    protected SHAGenerator() {
         // EJB need this.
     }
 

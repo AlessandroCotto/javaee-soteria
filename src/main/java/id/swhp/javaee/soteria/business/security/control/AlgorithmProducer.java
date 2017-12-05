@@ -1,7 +1,7 @@
 package id.swhp.javaee.soteria.business.security.control;
 
 import id.swhp.javaee.soteria.business.security.boundary.HashGenerator;
-import id.swhp.javaee.soteria.business.security.entity.HashAlgorithm;
+import id.swhp.javaee.soteria.business.security.entity.Sha;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -14,14 +14,14 @@ import javax.enterprise.inject.spi.InjectionPoint;
 public class AlgorithmProducer {
 
     @Produces
-    @HashAlgorithm
+    @Sha
     public HashGenerator produceHashGenerator(InjectionPoint ip) {
 
         Annotated annotated = ip.getAnnotated();
 
-        HashAlgorithm hashAlgorithm = annotated.getAnnotation(HashAlgorithm.class);
+        Sha hashAlgorithm = annotated.getAnnotation(Sha.class);
 
-        HashGenerator hashGenerator = new HashGenerator(hashAlgorithm.algorithm().getAlgorithmName());
+        HashGenerator hashGenerator = new SHAGenerator(hashAlgorithm.algorithm().getAlgorithmName());
 
         return hashGenerator;
     }

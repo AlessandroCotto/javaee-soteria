@@ -9,6 +9,8 @@ import id.swhp.javaee.soteria.business.account.entity.Account;
 import id.swhp.javaee.soteria.business.exception.boundary.InvalidUsernameException;
 import id.swhp.javaee.soteria.business.security.entity.HashServiceType;
 import id.swhp.javaee.soteria.business.security.entity.HashType;
+import id.swhp.javaee.soteria.business.security.entity.SHAAlgorithm;
+import id.swhp.javaee.soteria.business.security.entity.Sha;
 import id.swhp.javaee.soteria.business.security.entity.Token;
 import id.swhp.javaee.soteria.business.security.entity.TokenType;
 import java.time.Instant;
@@ -30,6 +32,7 @@ public class TokenStore {
 
     @Inject
     @HashServiceType(HashType.SHA)
+    @Sha(algorithm = SHAAlgorithm.SHA256)
     HashGenerator hash;
 
     @Inject

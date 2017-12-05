@@ -21,8 +21,8 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target({METHOD, FIELD, PARAMETER, TYPE})
-public @interface HashAlgorithm {
+public @interface Sha {
 
     @Nonbinding
-    Algorithm algorithm() default Algorithm.SHA512;
+    SHAAlgorithm algorithm() default SHAAlgorithm.SHA512;
 }

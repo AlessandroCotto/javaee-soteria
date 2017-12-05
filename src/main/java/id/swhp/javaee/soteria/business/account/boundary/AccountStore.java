@@ -14,6 +14,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import id.swhp.javaee.soteria.business.security.entity.HashServiceType;
 import id.swhp.javaee.soteria.business.security.entity.HashType;
+import id.swhp.javaee.soteria.business.security.entity.SHAAlgorithm;
+import id.swhp.javaee.soteria.business.security.entity.Sha;
 
 /**
  *
@@ -28,6 +30,7 @@ public class AccountStore {
 
     @Inject
     @HashServiceType(HashType.SHA)
+    @Sha(algorithm = SHAAlgorithm.SHA256)
     HashGenerator tokenHash;
 
     @Inject
