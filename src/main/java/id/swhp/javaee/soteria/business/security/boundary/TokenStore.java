@@ -7,8 +7,8 @@ import static java.util.UUID.randomUUID;
 import id.swhp.javaee.soteria.business.account.boundary.AccountStore;
 import id.swhp.javaee.soteria.business.account.entity.Account;
 import id.swhp.javaee.soteria.business.exception.boundary.InvalidUsernameException;
-import id.swhp.javaee.soteria.business.security.entity.Algorithm;
-import id.swhp.javaee.soteria.business.security.entity.HashAlgorithm;
+import id.swhp.javaee.soteria.business.security.entity.HashServiceType;
+import id.swhp.javaee.soteria.business.security.entity.HashType;
 import id.swhp.javaee.soteria.business.security.entity.Token;
 import id.swhp.javaee.soteria.business.security.entity.TokenType;
 import java.time.Instant;
@@ -29,7 +29,7 @@ public class TokenStore {
     EntityManager em;
 
     @Inject
-    @HashAlgorithm(algorithm = Algorithm.SHA256)
+    @HashServiceType(HashType.SHA)
     HashGenerator hash;
 
     @Inject
@@ -54,7 +54,7 @@ public class TokenStore {
 
         Token token = new Token();
 
-        token.setTokenHash(this.hash.getHashText(rawToken));
+        token.setTokenHash(this.hash.getHashedText(rawToken));
         token.setExpiration(expiration);
         token.setDescription(description);
         token.setTokenType(tokenType);
