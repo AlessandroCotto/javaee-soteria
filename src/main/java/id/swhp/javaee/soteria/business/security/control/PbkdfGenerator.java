@@ -1,6 +1,8 @@
 package id.swhp.javaee.soteria.business.security.control;
 
 import id.swhp.javaee.soteria.business.security.boundary.HashGenerator;
+import id.swhp.javaee.soteria.business.security.entity.HashServiceType;
+import id.swhp.javaee.soteria.business.security.entity.HashType;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -14,6 +16,7 @@ import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
  * @version 1.0.0
  */
 @Stateless
+@HashServiceType(HashType.PBKDF)
 public class PbkdfGenerator implements HashGenerator {
 
     @Inject
