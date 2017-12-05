@@ -1,5 +1,6 @@
-package id.swhp.javaee.soteria.business.security.boundary;
+package id.swhp.javaee.soteria.business.security.control;
 
+import id.swhp.javaee.soteria.business.security.boundary.HashGenerator;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -13,7 +14,7 @@ import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
  * @version 1.0.0
  */
 @Stateless
-public class PbkdfGenerator {
+public class PbkdfGenerator implements HashGenerator {
 
     @Inject
     Pbkdf2PasswordHash pbkdfHash;
@@ -29,13 +30,13 @@ public class PbkdfGenerator {
         this.pbkdfHash.initialize(parameters);
     }
 
-    public String getHashText(final String text) {
-        char[] tempCharText = text.toCharArray();
-        return this.pbkdfHash.generate(tempCharText);
+    @Override
+    public String getHashedText(String text) {
+        return this.pbkdfHash.generate(text.toCharArray());
     }
 
-    public boolean isHashTextValid(final String text, final String hashedText) {
-        char[] tempCharText = text.toCharArray();
-        return this.pbkdfHash.verify(tempCharText, hashedText);
+    @Override
+    public boolean isHashedTextMatch(String text, String hashedText) {
+        return this.pbkdfHash.verify(text.toCharArray(), hashedText);
     }
 }
