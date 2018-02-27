@@ -1,3 +1,4 @@
+-- DDL for PostgreSQL and MariaDB/MySQL
 CREATE TABLE account(
    id SERIAL PRIMARY KEY,
    username VARCHAR(100) UNIQUE NOT NULL,
