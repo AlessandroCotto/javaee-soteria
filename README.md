@@ -6,10 +6,18 @@ Playing around with new JSR-375 (Security API) and _Reference Implementation_ So
 ### Requirements
 * Java 8
 * Apache Maven
-* PostgreSQL 9.5
-* [Payara Full Webserver](https://www.payara.fish/downloads)
+* Database
+  * PostgreSQL 9 and above
+  * MySQL or MariaDB 5 and above
+* Full Java EE Server
+  * [Payara Full](https://www.payara.fish/downloads)
+  * [Wildfly](http://wildfly.org/downloads/)
 
-### Database Schema
+#### PostgreSQL
+
+#### Database Schema
+
+
 * Prepare user and database on PostgreSQL.
 
 ```
@@ -24,9 +32,9 @@ GRANT ALL PRIVILEGES ON DATABASE soteriadb TO demo;
 psql -U demo -d soteriadb -a -f ./src/main/resources/db/schema.sql
 ```
 
-### Application Server (Payara / Glassfish)
+#### Application Server (Payara / Glassfish)
 
-#### PostgreSQL JDBC Driver
+##### PostgreSQL JDBC Driver
 Download [PostgreSQL jdbc driver](https://jdbc.postgresql.org/download/postgresql-42.1.4.jre6.jar) 
 and put it into `${PAYARA_HOME}/glassfish/domains/${YOUR_DOMAIN}/lib`
 
@@ -34,7 +42,7 @@ and put it into `${PAYARA_HOME}/glassfish/domains/${YOUR_DOMAIN}/lib`
 curl -o ${PAYARA_HOME}/glassfish/domains/${PAYARA_DOMAIN}/lib/postgresql-41.1.4.jar -L https://jdbc.postgresql.org/download/postgresql-42.1.4.jre6.jar
 ```
 
-#### JDBC Resource and Pool
+##### JDBC Resource and Pool
 Make sure working directory on `${PAYARA_HOME}/bin`.
 
 * Start Application Server.
