@@ -240,20 +240,19 @@ In the folder `${WildFly_Config}` modify the a standalone-full.xml file by addin
 ```
 <subsystem xmlns="urn:jboss:domain:datasources:4.0">    
  <datasources>
-   <xa-datasource jndi-name="jdbc/soteria" pool-name="Soteria">
-   <driver>mysql</driver>
-     <xa-datasource-property name="ServerName">localhost</xa-datasource-property>
-     <xa-datasource-property name="DatabaseName">soteriadb</xa-datasource-property>
-     <security>
-       <user-name>demo</user-name>
-       <password>password</password>
-     </security>
-     <validation>
-       <background-validation>true</background-validation>
-       <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"></valid-connection-checker>
-       <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"></exception-sorter>
-     </validation>
-   </xa-datasource>   
+    <datasource jndi-name="jdbc/soteria" pool-name="Soteria" enabled="true">
+      <driver>mysql</driver>
+      <security>
+        <user-name>demo</user-name>
+        <password>password</password>
+      </security>
+      <validation>
+        <background-validation>true</background-validation>
+        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"></valid-connection-checker>
+        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"></exception-sorter>
+      </validation>
+   </datasource>
+   ...   
    <drivers>
      <driver name="mysql" module="com.mysql">
        <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
