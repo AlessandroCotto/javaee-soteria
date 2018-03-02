@@ -185,7 +185,7 @@ Make sure working directory on `${PAYARA_HOME}/bin`.
 ./asadmin create-jdbc-connection-pool \
 --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource \
 --restype javax.sql.ConnectionPoolDataSource \
---property User=demo:Password=password:DatabaseName=soteriadb:ServerName=localhost:PortNumber=5432 Soteria
+--property User=demo:Password=password:DatabaseName=soteriadb:ServerName=localhost:PortNumber=3306 Soteria
 ```
 
 * Create JDBC Resource.
@@ -229,7 +229,7 @@ You may also use the Wildfly CLI for defining the module:
 
 embed-server --std-out=echo --server-config=standalone.xml
 
-module add --name=org.postgres --resources=/tmp/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar --dependencies=javax.api,javax.transaction.api
+module add --name=com.mysql --resources=/tmp/mysql-connector-java-5.1.45/mysql-connector-java-5.1.45-bin.jar --dependencies=javax.api,javax.transaction.api
 
 exit
 ```
