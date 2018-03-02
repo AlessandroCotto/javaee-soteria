@@ -213,12 +213,12 @@ Copy the <module> element below and paste it into your module.xml file:
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="urn:jboss:module:1.1" name="com.mysql">
-	<resources>
-		<resource-root path="mysql-connector-java-5.1.45-bin.jar" />
-	</resources>
-	<dependencies>
-		<module name="javax.api" />
-		<module name="javax.transaction.api" />
+  <resources>
+	  <resource-root path="mysql-connector-java-5.1.45-bin.jar" />
+  </resources>
+  <dependencies>
+	  <module name="javax.api" />
+	  <module name="javax.transaction.api" />
 	</dependencies>
 </module>
 ```
