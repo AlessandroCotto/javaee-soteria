@@ -150,7 +150,7 @@ In the folder `${WildFly_Config}` modify the `standalone.xml` file (or others li
 ```
 CREATE DATABASE soteriadb;
 GRANT USAGE ON `soteriadb`.* TO 'demo'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON `soteriadb`.* TO 'demo'@localhost;
+GRANT ALL PRIVILEGES ON `soteriadb`.* TO 'demo'@localhost IDENTIFIED BY 'password';
 ```
 
 * Execute `schema.sql`.
