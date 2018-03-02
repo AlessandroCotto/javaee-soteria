@@ -120,7 +120,7 @@ In the folder `${WildFly_Config}` modify the `standalone.xml` file (or others li
 <subsystem xmlns="urn:jboss:domain:datasources:4.0">
     <datasources>
        ...
-        <datasource jndi-name="jdbc/soteria" pool-name="Soteria" enabled="true" use-java-context="true">
+        <datasource jndi-name="java:/jdbc/soteria" pool-name="Soteria" enabled="true" use-java-context="true">
             <connection-url>jdbc:postgresql://localhost:5432/soteriadb</connection-url>
             <driver>postgres</driver>
             <security>
@@ -240,23 +240,29 @@ In the folder `${WildFly_Config}` modify the a standalone-full.xml file by addin
 ```
 <subsystem xmlns="urn:jboss:domain:datasources:4.0">    
  <datasources>
-    <datasource jndi-name="jdbc/soteria" pool-name="Soteria" enabled="true">
+  <datasource jndi-name="java:/jdbc/soteria" pool-name="Soteria">
+      <connection-url>jdbc:mysql://localhost:3306/soteriadb</connection-url>
       <driver>mysql</driver>
+      <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+      <pool>
+          <min-pool-size>10</min-pool-size>
+          <max-pool-size>100</max-pool-size>
+          <prefill>true</prefill>
+      </pool>
       <security>
-        <user-name>demo</user-name>
-        <password>password</password>
+          <user-name>demo</user-name>
+          <password>password</password>
       </security>
-      <validation>
-        <background-validation>true</background-validation>
-        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"></valid-connection-checker>
-        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"></exception-sorter>
-      </validation>
-   </datasource>
+      <statement>
+          <prepared-statement-cache-size>32</prepared-statement-cache-size>
+      </statement>
+  </datasource>
    ...   
    <drivers>
-     <driver name="mysql" module="com.mysql">
-       <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
-     </driver>
+      ...
+      <driver name="mysql" module="com.mysql">
+          <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+      </driver>
    </drivers>
  </datasources>
  ...
