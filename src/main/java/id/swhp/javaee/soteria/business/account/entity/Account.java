@@ -4,17 +4,7 @@ import id.swhp.javaee.soteria.business.security.entity.Token;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -42,7 +32,9 @@ public class Account implements Serializable {
     public static final String FIND_BY_TOKEN = "Account.findByToken";
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    //@GeneratedValue(generator = "account_id_seq", strategy = GenerationType.SEQUENCE) // Use with Postgres/Oracle
+    //@SequenceGenerator(name = "account_id_seq", sequenceName = "account_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // Use with MySQL/MS-SQL
     private Long id;
 
     @NotNull
