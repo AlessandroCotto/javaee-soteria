@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Sukma Wardana
+ * @author Werner Keil
  * @since 1.0
  */
 @AutoApplySession // For "Is user already logged-in?"
@@ -41,6 +42,7 @@ public class SoteriaFormAuthenticationMechanism implements HttpAuthenticationMec
         Credential credential = context.getAuthParameters().getCredential();
 
         if (credential != null) {
+            System.out.println(String.format("Credential %s", credential));
             return context.notifyContainerAboutLogin(this.identityStoreHandler.validate(credential));
         } else {
             return context.doNothing();

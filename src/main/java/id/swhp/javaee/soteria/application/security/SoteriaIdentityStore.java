@@ -31,6 +31,7 @@ public class SoteriaIdentityStore implements IdentityStore {
 
     @Override
     public CredentialValidationResult validate(Credential credential) {
+        System.out.println("Validating...");
         try {
 
             // check if the credential was UsernamePasswordCredential
