@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -22,6 +21,7 @@ import javax.validation.constraints.Size;
 /**
  *
  * @author Sukma Wardana
+ * @author Werner Keil
  * @since 1.0
  */
 @Entity
@@ -42,8 +42,7 @@ public class Account implements Serializable {
     public static final String FIND_BY_TOKEN = "Account.findByToken";
 
     @Id
-    @GeneratedValue(generator = "account_id_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "account_id_seq", sequenceName = "account_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @NotNull

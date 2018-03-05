@@ -44,8 +44,9 @@ public class Token implements Serializable {
     public static final String REMOVE_EXPIRED_TOKEN = "Token.removeExpiredToken";
 
     @Id
-    @GeneratedValue(generator = "token_id_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "token_id_seq", sequenceName = "token_id_seq", allocationSize = 1)
+    //@GeneratedValue(generator = "token_id_seq", strategy = GenerationType.SEQUENCE) // Use for Postgres/Oracle
+    //@SequenceGenerator(name = "token_id_seq", sequenceName = "token_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // Use for MySQL/MS-SQL
     private Long id;
 
     @Column(name = "token_hash")
