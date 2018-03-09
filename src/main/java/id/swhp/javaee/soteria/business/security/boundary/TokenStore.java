@@ -6,7 +6,7 @@ import static java.util.UUID.randomUUID;
 
 import id.swhp.javaee.soteria.business.account.boundary.AccountStore;
 import id.swhp.javaee.soteria.business.account.entity.Account;
-import id.swhp.javaee.soteria.business.exception.boundary.InvalidUsernameException;
+import id.swhp.javaee.soteria.business.exception.InvalidUsernameException;
 import id.swhp.javaee.soteria.business.security.entity.HashServiceType;
 import id.swhp.javaee.soteria.business.security.entity.HashType;
 import id.swhp.javaee.soteria.business.security.entity.SHAAlgorithm;

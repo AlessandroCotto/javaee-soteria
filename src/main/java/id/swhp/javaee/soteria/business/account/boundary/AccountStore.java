@@ -1,8 +1,8 @@
 package id.swhp.javaee.soteria.business.account.boundary;
 
 import id.swhp.javaee.soteria.business.account.entity.Account;
-import id.swhp.javaee.soteria.business.exception.boundary.InvalidPasswordException;
-import id.swhp.javaee.soteria.business.exception.boundary.InvalidUsernameException;
+import id.swhp.javaee.soteria.business.exception.InvalidPasswordException;
+import id.swhp.javaee.soteria.business.exception.InvalidUsernameException;
 import id.swhp.javaee.soteria.business.security.boundary.HashGenerator;
 import id.swhp.javaee.soteria.business.security.boundary.TokenStore;
 import id.swhp.javaee.soteria.business.security.entity.TokenType;

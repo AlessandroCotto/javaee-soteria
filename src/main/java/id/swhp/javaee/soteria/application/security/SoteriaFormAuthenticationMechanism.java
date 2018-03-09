@@ -12,6 +12,8 @@ import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.identitystore.IdentityStoreHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.MessageFormat;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 )
 @ApplicationScoped
 public class SoteriaFormAuthenticationMechanism implements HttpAuthenticationMechanism {
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Inject
     IdentityStoreHandler identityStoreHandler;
@@ -42,7 +45,7 @@ public class SoteriaFormAuthenticationMechanism implements HttpAuthenticationMec
         Credential credential = context.getAuthParameters().getCredential();
 
         if (credential != null) {
-            System.out.println(String.format("Credential %s", credential));
+            logger.fine( () -> MessageFormat.format("Credential {0}", credential));
             return context.notifyContainerAboutLogin(this.identityStoreHandler.validate(credential));
         } else {
             return context.doNothing();

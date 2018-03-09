@@ -32,9 +32,10 @@ public class Account implements Serializable {
     public static final String FIND_BY_TOKEN = "Account.findByToken";
 
     @Id
-    //@GeneratedValue(generator = "account_id_seq", strategy = GenerationType.SEQUENCE) // Use with Postgres/Oracle
+    // Use the following two lines instead of IDENTITY should you work with PostgreSQL 8/9 and Oracle prior to 12c
+    //@GeneratedValue(generator = "account_id_seq", strategy = GenerationType.SEQUENCE)
     //@SequenceGenerator(name = "account_id_seq", sequenceName = "account_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy=GenerationType.IDENTITY) // Use with MySQL/MS-SQL
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // Use with MySQL/MS-SQL, Oracle 12c or PostgreSQL 10 and above
     private Long id;
 
     @NotNull

@@ -5,8 +5,8 @@ import static javax.security.enterprise.identitystore.CredentialValidationResult
 
 import id.swhp.javaee.soteria.business.account.boundary.AccountStore;
 import id.swhp.javaee.soteria.business.account.entity.Account;
-import id.swhp.javaee.soteria.business.exception.boundary.AccountNotVerifiedException;
-import id.swhp.javaee.soteria.business.exception.boundary.InvalidCredentialException;
+import id.swhp.javaee.soteria.application.exception.AccountNotVerifiedException;
+import id.swhp.javaee.soteria.application.exception.InvalidCredentialException;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;

@@ -7,7 +7,7 @@ Playing around with new JSR-375 (Security API) and _Reference Implementation_ So
 * Java 8
 * Apache Maven
 * Database
-  * PostgreSQL 9 and above
+  * PostgreSQL 9 and above (**10 or above recommended**)
   * MySQL or MariaDB 5 and above
 * Full Java EE Server
   * [Payara Full](https://www.payara.fish/downloads)
@@ -26,11 +26,20 @@ CREATE DATABASE soteriadb OWNER demo ENCODING 'UTF-8';
 GRANT ALL PRIVILEGES ON DATABASE soteriadb TO demo;
 ```
 
-* Execute `schema.sql`.
+* Execute `schema_postgres10.sql`.<br/>
+  Or `schema.sql` if you're using PostgreSQL prior to version 10.
 
 ```
-psql -U demo -d soteriadb -a -f ./src/main/resources/db/schema.sql
+psql -U demo -d soteriadb -a -f ./src/main/resources/db/schema_postgres10.sql
 ```
+
+#### Entities
+
+!!! Note:
+
+    Only for PostgreSQL prior to version 10.
+
+Because
 
 #### Application Server 
 
