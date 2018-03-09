@@ -35,11 +35,13 @@ psql -U demo -d soteriadb -a -f ./src/main/resources/db/schema_postgres10.sql
 
 #### Entities
 
-!!! Note:
+---
+**NOTE**
 
-    Only for PostgreSQL prior to version 10.
+Only for PostgreSQL prior to version 10
 
-Because
+---
+
 
 #### Application Server 
 
