@@ -42,6 +42,27 @@ Only for PostgreSQL prior to version 10
 
 ---
 
+Because PostgreSQL 10 now supports the column type `identity` like most other modern DB systems the 
+`@Id`  of entities in this example is compatible with MySQL/MariaDB or others. (MS-SQL server, Oracle 12c or DB2 were not tested but they would also work) 
+
+If you need to use PostgreSQL 9 or below, please modify the entity classes `Account` and `Token`.
+
+Replace
+```
+   @Id
+   @GeneratedValue(strategy=GenerationType.IDENTITY) // Use with MySQL/MS-SQL, Oracle 12c or PostgreSQL 10 and above
+   private Long id;
+```
+with
+```
+   @Id
+   // Use the following two lines instead of IDENTITY should you work with PostgreSQL 8/9 and Oracle prior to 12c
+   @GeneratedValue(generator = "account_id_seq", strategy = GenerationType.SEQUENCE)
+   @SequenceGenerator(name = "account_id_seq", sequenceName = "account_id_seq", allocationSize = 1)
+   private Long id;
+```
+(example from `Account`)
+By changing the code comments accordingly.
 
 #### Application Server 
 
