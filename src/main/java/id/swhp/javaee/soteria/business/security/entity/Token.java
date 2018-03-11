@@ -27,6 +27,7 @@ import javax.validation.constraints.Size;
 /**
  *
  * @author Sukma Wardana
+ * @author Werner Keil
  * @since 1.0.0
  */
 @Entity
@@ -44,8 +45,10 @@ public class Token implements Serializable {
     public static final String REMOVE_EXPIRED_TOKEN = "Token.removeExpiredToken";
 
     @Id
-    @GeneratedValue(generator = "token_id_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "token_id_seq", sequenceName = "token_id_seq", allocationSize = 1)
+    // Use the following two lines instead of IDENTITY should you work with PostgreSQL 8/9 and Oracle prior to 12c
+    //@GeneratedValue(generator = "token_id_seq", strategy = GenerationType.SEQUENCE)
+    //@SequenceGenerator(name = "token_id_seq", sequenceName = "token_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // Use with MySQL/MS-SQL, Oracle 12c or PostgreSQL 10 and above
     private Long id;
 
     @Column(name = "token_hash")

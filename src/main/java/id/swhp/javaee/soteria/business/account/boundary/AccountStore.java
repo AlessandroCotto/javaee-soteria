@@ -1,12 +1,10 @@
 package id.swhp.javaee.soteria.business.account.boundary;
 
 import id.swhp.javaee.soteria.business.account.entity.Account;
-import id.swhp.javaee.soteria.business.exception.boundary.InvalidPasswordException;
-import id.swhp.javaee.soteria.business.exception.boundary.InvalidUsernameException;
+import id.swhp.javaee.soteria.business.exception.InvalidPasswordException;
+import id.swhp.javaee.soteria.business.exception.InvalidUsernameException;
 import id.swhp.javaee.soteria.business.security.boundary.HashGenerator;
 import id.swhp.javaee.soteria.business.security.boundary.TokenStore;
-import id.swhp.javaee.soteria.business.security.entity.Algorithm;
-import id.swhp.javaee.soteria.business.security.entity.HashAlgorithm;
 import id.swhp.javaee.soteria.business.security.entity.TokenType;
 import java.util.Optional;
 import javax.ejb.Stateless;
@@ -14,6 +12,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import id.swhp.javaee.soteria.business.security.entity.HashServiceType;
+import id.swhp.javaee.soteria.business.security.entity.HashType;
+import id.swhp.javaee.soteria.business.security.entity.SHAAlgorithm;
+import id.swhp.javaee.soteria.business.security.entity.Sha;
 
 /**
  *
@@ -27,18 +29,19 @@ public class AccountStore {
     EntityManager em;
 
     @Inject
-    @HashAlgorithm(algorithm = Algorithm.SHA256)
+    @HashServiceType(HashType.SHA)
+    @Sha(algorithm = SHAAlgorithm.SHA256)
     HashGenerator tokenHash;
 
     @Inject
-    @HashAlgorithm
+    @HashServiceType(HashType.PBKDF)
     HashGenerator passwordHash;
 
     @Inject
     TokenStore tokenStore;
 
     public void registerAccount(final String username, final String email, final String password) {
-        String securedPassword = this.passwordHash.getHashText(password);
+        String securedPassword = this.passwordHash.getHashedText(password);
 
         Account account = new Account(username, securedPassword, email);
 
@@ -74,7 +77,7 @@ public class AccountStore {
         try {
             return Optional.of(
                     this.em.createNamedQuery(Account.FIND_BY_TOKEN, Account.class)
-                            .setParameter("tokenHash", this.tokenHash.getHashText(loginToken))
+                            .setParameter("tokenHash", this.tokenHash.getHashedText(loginToken))
                             .setParameter("tokenType", tokenType)
                             .getSingleResult()
             );
@@ -86,9 +89,7 @@ public class AccountStore {
     public Account getByUsernameAndPassword(String username, String password) {
         Account managedAccount = getByUsername(username).orElseThrow(InvalidUsernameException::new);
 
-        String hashesPassword = this.passwordHash.getHashText(password);
-
-        if (!hashesPassword.equals(managedAccount.getPassword())) {
+        if (!this.passwordHash.isHashedTextMatch(password, managedAccount.getPassword())) {
             throw new InvalidPasswordException();
         }
 
